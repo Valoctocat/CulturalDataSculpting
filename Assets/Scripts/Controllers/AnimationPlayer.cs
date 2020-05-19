@@ -154,7 +154,7 @@ public class AnimationPlayer : MonoBehaviour
 
     public void OnExit() {
 
-
+        DATASET_NAME = "Unknown";
         if(_animationFinished || _enlargingCube) {
           // Make cube small again, then make it go Down
           // MAke room right scale
