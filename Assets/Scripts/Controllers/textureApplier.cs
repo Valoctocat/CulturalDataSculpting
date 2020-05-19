@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class textureApplier : MonoBehaviour
+public class TextureApplier : MonoBehaviour
 {
     //private intstances
     private Material current_material;
@@ -11,16 +11,11 @@ public class textureApplier : MonoBehaviour
     void Awake()
     {
         this.current_material = GetComponent<Renderer>().materials[1];
+        this.current_material.color = new Color(1,1,1,1);
 
     }
 
     public void applyTexture(Texture texture) {
         this.current_material.mainTexture = texture;
     }
-
-    public void updateScale(Vector3 newScale, float new_y) {
-        this.transform.localScale = newScale;
-        //this.transform.Translate(Vector3.up*new_y);
-    }
-
 }
