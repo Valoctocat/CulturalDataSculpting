@@ -60,7 +60,7 @@ public class AnimationPlayer : MonoBehaviour
         }
 
         if(_waitingDSet != null) {
-            if((!_raisingCube) && (!_enlargingCube) && (!_forceRaiseDown) &&(!_forceScaleDown)) {
+            if((!_raisingCube) && (!_enlargingCube) && (!_forceRaiseDown) && (!_forceScaleDown) && (!_waitingDSet.GetComponent<OVRGrabbable>().isGrabbed)) {
                 OnEnter(_waitingDSet);
             }
         }
@@ -133,28 +133,33 @@ public class AnimationPlayer : MonoBehaviour
     }
 
     public void OnEnter(GameObject dataset) {
-        if((_dataset == null) && (!_raisingCube) && (!_enlargingCube) && (!_forceRaiseDown) &&(!_forceScaleDown)) {
-            timer = 1.0f;
-            _waitingDSet = null;
-            _dataset = dataset;
-            min_scale = _dataset.transform.localScale.x;
+        if(dataset.GetComponent<OVRGrabbable>() != null) {
+            OVRGrabbable grabbable = dataset.GetComponent<OVRGrabbable>();
+            if((_dataset == null) && (!_raisingCube) && (!_enlargingCube) && (!_forceRaiseDown) &&(!_forceScaleDown) && (!grabbable.isGrabbed)) {
+                timer = 1.0f;
+                _waitingDSet = null;
+                _dataset = dataset;
+                min_scale = _dataset.transform.localScale.x;
 
-            //Create Phantom Cube
-            _duplicatedDset = Instantiate(_dataset);
-            _duplicatedDset.GetComponent<Rigidbody>().isKinematic = true;
-            Destroy(_duplicatedDset.GetComponent<OVRGrabbable>());
-            Destroy(_duplicatedDset.GetComponent<Rigidbody>());
-            Destroy(_duplicatedDset.GetComponent<Collider>());
-            Destroy(_duplicatedDset.GetComponent<CubeController>());
-            _raisingCube = true;
-        } else {
-            _waitingDSet = dataset;
+                //Create Phantom Cube
+                _duplicatedDset = Instantiate(_dataset);
+                _duplicatedDset.GetComponent<Rigidbody>().isKinematic = true;
+                Destroy(_duplicatedDset.GetComponent<OVRGrabbable>());
+                Destroy(_duplicatedDset.GetComponent<Rigidbody>());
+                Destroy(_duplicatedDset.GetComponent<Collider>());
+                Destroy(_duplicatedDset.GetComponent<CubeController>());
+                _raisingCube = true;
+            } else {
+                _waitingDSet = dataset;
+            }
         }
     }
 
     public void OnExit() {
 
         DATASET_NAME = "Unknown";
+        _waitingDSet = null;
+
         if(_animationFinished || _enlargingCube) {
           // Make cube small again, then make it go Down
           // MAke room right scale
@@ -167,6 +172,7 @@ public class AnimationPlayer : MonoBehaviour
           _raisingCube = false;
           _forceRaiseDown = true;
         }
+
     }
 
     // Called when the dataset position is reset back to normal.
