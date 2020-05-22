@@ -9,7 +9,7 @@ public class Stack2DVisualizer : MonoBehaviour
     public float delay;
     public GameObject curved_plane_prefab;
     public int nb_screens;
-
+    public float bpm = 20;
     //private instances
     private GameObject[] screens;
     private TextureApplier[] screensAppliers;
@@ -69,7 +69,7 @@ public class Stack2DVisualizer : MonoBehaviour
     }
 
     IEnumerator playLoop(int screen) {
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(1/bpm);
 
         //Main Loop
         for(int frame_counter = 0; frame_counter<this.objects.Length; frame_counter++) {

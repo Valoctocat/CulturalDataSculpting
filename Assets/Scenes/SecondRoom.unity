@@ -220,6 +220,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2272542433312396554, guid: 75e7d8c0fe68cc04380a968f6781092d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6913569023257756517, guid: 75e7d8c0fe68cc04380a968f6781092d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6913569023257756519, guid: 75e7d8c0fe68cc04380a968f6781092d,
         type: 3}
       propertyPath: m_UseGravity
@@ -679,7 +689,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0.02
-  spawnProbability: 0.05
   curved_plane_prefab: {fileID: -927199367670048503, guid: 93a0b61f978f53449bedf01fd4fe84ae,
     type: 3}
   nb_screens: 5
