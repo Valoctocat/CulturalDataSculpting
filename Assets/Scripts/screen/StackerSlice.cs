@@ -19,7 +19,6 @@ public class StackerSlice : MonoBehaviour
     {
         LoadStack(stackName);
         SpawnStack(new Vector3(1,0,0), new Vector3(1, 0, 0));
-        SpawnStack(new Vector3(0.3f, 0, 0.3f), new Vector3(1, 0, 0));
     }
 
     public void LoadStack(string stackName/*GameObject s*/)
