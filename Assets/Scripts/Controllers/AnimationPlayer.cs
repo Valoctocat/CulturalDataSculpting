@@ -166,6 +166,11 @@ public class AnimationPlayer : MonoBehaviour
           _forceScaleDown = true;
           _enlargingCube = false;
           _animationFinished = false;
+          GoToGround[] screenControllers = (GoToGround[]) FindObjectsOfType<GoToGround>();
+          foreach (GoToGround screen in screenControllers)
+           {
+               screen.SetReady(false);
+           }
 
         } else if(_raisingCube) {
           // Make cube go down again.
@@ -206,6 +211,12 @@ public class AnimationPlayer : MonoBehaviour
         _raisingCube = false;
         DATASET_NAME = _dataset.name;
         timerScale = 1.0f;
+
+        GoToGround[] screenControllers = (GoToGround[]) FindObjectsOfType<GoToGround>();
+        foreach (GoToGround screen in screenControllers)
+         {
+             screen.SetReady(true);
+         }
     }
 
     private IEnumerator EnlargeCube() {

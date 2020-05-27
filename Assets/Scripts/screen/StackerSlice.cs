@@ -19,7 +19,7 @@ public class StackerSlice : MonoBehaviour
     void Start()
     {
         LoadStack(stackName);
-        SpawnStack(new Vector3(1,0,0), new Vector3(1, 0, 0));
+        //SpawnStack(new Vector3(1,0,0), new Vector3(1, 0, 0));
         //SpawnStack(new Vector3(0.3f, 0, 0.3f), new Vector3(1, 0, 0));
     }
 
@@ -35,10 +35,9 @@ public class StackerSlice : MonoBehaviour
        // s.GetComponent<Renderer>().material.SetTexture("bob", textures[i]);
        // current_mat.mainTexture = texture;
     }
-    public void CreateSlice(Texture t, Vector3 offset)
+    public void CreateSlice(Texture t, Vector3 offset, Quaternion orientation)
     {
-        GameObject s = Instantiate(slice);
-        slice.GetComponent<Transform>().position = offset + Vector3.up*height;
+        GameObject s = Instantiate(slice, offset+ Vector3.up*height, orientation*slice.transform.rotation);
         SetTexture(s,t);
         slices.Add(s);
 
@@ -55,7 +54,7 @@ public class StackerSlice : MonoBehaviour
 
 
 
-    public void SpawnStack(Vector3 direction, Vector3 startPos)
+    public void SpawnStack(Vector3 direction, Vector3 startPos, Quaternion orientation)
     {
         int i = 0;
         int u = 0;
@@ -70,9 +69,9 @@ public class StackerSlice : MonoBehaviour
             i++;
             if (i % filter == 0)
             {
-                CreateSlice(t, offset);
-                offset += direction*this.space;
-                Debug.Log(offset);
+                CreateSlice(t, offset, orientation);
+                offset = offset + direction*this.space;
+
             }
         }
     }

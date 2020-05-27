@@ -51,8 +51,8 @@ LightmapSettings:
     m_IndirectOutputScale: 1
     m_AlbedoBoost: 1
     m_EnvironmentLightingMode: 0
-    m_EnableBakedLightmaps: 0
-    m_EnableRealtimeLightmaps: 1
+    m_EnableBakedLightmaps: 1
+    m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
     serializedVersion: 12
     m_Resolution: 2
@@ -1021,7 +1021,7 @@ MonoBehaviour:
   _floorAnimator: {fileID: 943045665}
   max_radius: 11
   min_radius: 1
-  max_scale: 900
+  max_scale: 1050
   scaling_speed: 0.01
   raising_speed: 0.0001
   _fader: {fileID: 1745523291}
@@ -2351,7 +2351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0.1
-  curved_plane_prefab: {fileID: -927199367670048503, guid: 93a0b61f978f53449bedf01fd4fe84ae,
+  curved_plane_prefab: {fileID: 7442933174497732275, guid: 74401bf0b0e466647997541c44b95fac,
     type: 3}
   nb_screens: 5
 --- !u!4 &1622981764
@@ -2530,7 +2530,7 @@ GameObject:
   - component: {fileID: 2102395009}
   m_Layer: 0
   m_Name: User
-  m_TagString: Untagged
+  m_TagString: User
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

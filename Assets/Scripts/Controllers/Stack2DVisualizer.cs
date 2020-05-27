@@ -9,6 +9,7 @@ public class Stack2DVisualizer : MonoBehaviour
     public float delay;
     public GameObject curved_plane_prefab;
     public int nb_screens;
+    public float _ditsToCenter = 4.5f;
 
     //private instances
     private GameObject[] screens;
@@ -39,6 +40,7 @@ public class Stack2DVisualizer : MonoBehaviour
 
 
     void Update() {
+
         //Create new Coroutine if there is still some room
         for (int i=0; i<screens.Length; i++) {
             if(!playing[i]) {
@@ -88,10 +90,12 @@ public class Stack2DVisualizer : MonoBehaviour
     private void instantiatePrefab(int i) {
       // Postion & Orientation
       Vector3 position_curved_plane = curved_plane_prefab.transform.position;
-      Quaternion orientation_curved_plane = Quaternion.Euler(270, i*360.0f/nb_screens, 0);
+      Quaternion orientation_curved_plane = Quaternion.Euler(0, i*360.0f/nb_screens, 0);
 
       // Instantiate
       screens[i] = Instantiate(curved_plane_prefab, position_curved_plane, orientation_curved_plane);
+      screens[i].transform.position -= screens[i].transform.forward*_ditsToCenter;
+      screens[i].transform.rotation *= Quaternion.Euler(0,90.0f, 0);
       screens[i].AddComponent<TextureApplier>();
       screensAppliers[i] = screens[i].GetComponent<TextureApplier>();
       screens[i].gameObject.transform.parent = this.transform;
