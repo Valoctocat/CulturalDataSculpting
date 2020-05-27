@@ -6,8 +6,10 @@ public class RoomScaler : MonoBehaviour
 {
     //Public instances
     public GameObject room;
+    public GameObject stackVisualizer;
     public float scaling_speed;
     public float end_scale;
+    public float raisingScreenSpeed;
 
     //private instances
     private float current_scale;
@@ -27,8 +29,11 @@ public class RoomScaler : MonoBehaviour
     }
 
     public void UpdateScale(float scale) {
-        float final_scale = Mathf.Clamp(scale, current_scale, end_scale);
+        float final_scale = Mathf.Clamp(scale*scaling_speed, current_scale, end_scale);
         this.room.transform.localScale = final_scale * Vector3.one;
+
+        float factor = Mathf.Clamp(scale*raisingScreenSpeed, 0.0f, 4.0f);
+        this.stackVisualizer.transform.position = Vector3.up * factor - (4*Vector3.up);
     }
 
     IEnumerator ScaleRoom() {

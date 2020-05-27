@@ -115,7 +115,7 @@ public class AnimationPlayer : MonoBehaviour
 
     private void UpdateDSet() {
         if(_duplicatedDset != null) {
-              _duplicatedDset.transform.position = new Vector3(_duplicatedDset.transform.position.x, 0.45f + current_radius/20.0f, _duplicatedDset.transform.position.z);
+              _duplicatedDset.transform.position = new Vector3(_duplicatedDset.transform.position.x, 1.0f + current_radius/10.0f, _duplicatedDset.transform.position.z);
               _duplicatedDset.transform.Rotate(0,5.0f*Time.deltaTime,0);
         }
     }

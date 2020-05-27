@@ -10,11 +10,13 @@ public class CubeController : MonoBehaviour
     private bool _wasGrabbed = false;
 
     public float _probability;
+    public GameObject UI;
 
     private OVRGrabbable _grabbable;
     private AudioController _audioController;
     private DatasetInterfaceController _interfaceController;
     private bool _interacted = false;
+    private UIManager _UIManager;
 
     // Start is called before the first frame update
     void Start()
@@ -26,29 +28,34 @@ public class CubeController : MonoBehaviour
         _grabbable = this.GetComponent<OVRGrabbable>();
         _audioController = this.GetComponent<AudioController>();
         _interfaceController = this.GetComponent<DatasetInterfaceController>();
+        _UIManager = UI.GetComponent<UIManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         if(_grabbable.isGrabbed) {
-            _material.color = _initColor +  new Color(0,0,0, 0.5f);
-            _material.SetColor("_EmissionColor", _initColor);
             if(!_wasGrabbed) {
                 _audioController.OnGrab();
                 _wasGrabbed = true;
+                _material.color = _initColor +  new Color(0,0,0, 0.5f);
+                _material.SetColor("_EmissionColor", _initEmissionColor);
+                _UIManager.OnGrab(this);
             }
         }
         else {
+            if(_wasGrabbed){
+                _audioController.OnRelease();
+                _UIManager.OnRelease(this);
+                _wasGrabbed = false;
+                _material.color = _initColor;
+                _material.SetColor("_EmissionColor", _initEmissionColor);
+            }
+
             if(_interacted) {
                 _material.color = _initColor +  new Color(0,0,0, 0.5f);
-                _material.SetColor("_EmissionColor", _initColor);
-            } else {
-                if(_wasGrabbed){
-                    _audioController.OnRelease();
-                    _wasGrabbed = false;
-                }
-
+            }
+            else {
                 if((!_audioController.isPlaying()) & (Random.Range(0.0f, 1.0f)<_probability)) {
                     _audioController.PlayCharacteristic(5.0f);
                     StartCoroutine(ChangeColor(5.0f));

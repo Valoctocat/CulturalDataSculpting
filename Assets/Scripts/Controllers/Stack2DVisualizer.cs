@@ -33,6 +33,8 @@ public class Stack2DVisualizer : MonoBehaviour
 
         //Loading images
         StartCoroutine("LoadImages");
+
+        this.transform.position = new Vector3(0.0f, -4.0f,0.0f);
     }
 
 
@@ -92,5 +94,6 @@ public class Stack2DVisualizer : MonoBehaviour
       screens[i] = Instantiate(curved_plane_prefab, position_curved_plane, orientation_curved_plane);
       screens[i].AddComponent<TextureApplier>();
       screensAppliers[i] = screens[i].GetComponent<TextureApplier>();
+      screens[i].gameObject.transform.parent = this.transform;
     }
 }
