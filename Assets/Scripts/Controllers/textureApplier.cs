@@ -11,10 +11,12 @@ public class TextureApplier : MonoBehaviour
     void Awake()
     {
         this.current_material = GetComponent<Renderer>().materials[1];
-        this.current_material.color = new Color(1,1,1,1);
+        //this.current_material.color = new Color(1,1,1,1);
 
     }
-
+    public void SetBackground() {
+      this.current_material.color = new Color(0.8f,0.8f,0.8f,1.0f);
+    }
     public void applyTexture(Texture texture) {
         this.current_material.mainTexture = texture;
     }

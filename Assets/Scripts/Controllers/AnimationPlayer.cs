@@ -16,6 +16,8 @@ public class AnimationPlayer : MonoBehaviour
     public float scaling_speed;
     public float raising_speed;
     public OVRScreenFade _fader;
+    public DataLoader _dataLoader;
+    public Stack2DVisualizer _st2dVisualizer;
 
     private bool _forceRaiseDown = false;
     private bool _forceScaleDown = false;
@@ -171,6 +173,7 @@ public class AnimationPlayer : MonoBehaviour
            {
                screen.SetReady(false);
            }
+          _st2dVisualizer.SetReady(false);
 
         } else if(_raisingCube) {
           // Make cube go down again.
@@ -211,6 +214,7 @@ public class AnimationPlayer : MonoBehaviour
         _raisingCube = false;
         DATASET_NAME = _dataset.name;
         timerScale = 1.0f;
+        _dataLoader.LoadImages(DATASET_NAME);
 
         GoToGround[] screenControllers = (GoToGround[]) FindObjectsOfType<GoToGround>();
         foreach (GoToGround screen in screenControllers)

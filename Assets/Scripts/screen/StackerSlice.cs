@@ -29,7 +29,6 @@ public class StackerSlice : MonoBehaviour
 
         //set the texture from the data path stored in the structure
         textures = Resources.LoadAll(stackName, typeof(Texture2D));
-        Debug.Log("number is "+ textures.Count());
 
 
        // s.GetComponent<Renderer>().material.SetTexture("bob", textures[i]);
