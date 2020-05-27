@@ -53,7 +53,7 @@ public class Stack2DVisualizer : MonoBehaviour
 
     IEnumerator LoadImages() {
         if(AnimationPlayer.DATASET_NAME != "Unknown") {
-            this.objects = Resources.LoadAll("droso", typeof(Texture2D));
+            this.objects = Resources.LoadAll(AnimationPlayer.DATASET_NAME + "_processed/t001/", typeof(Texture2D));
             this.textures = new Texture[this.objects.Length];
             for (int i = 0; i<this.objects.Length; i++) {
                 this.textures[i] = (Texture)this.objects[i];

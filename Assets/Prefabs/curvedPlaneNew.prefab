@@ -126,7 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   filter: 1
   space: 0.01
-  height: 0
+  height: 1
   slice: {fileID: 4456580150380846085, guid: 12b47835347ad554e8bb838bc8feda61, type: 3}
   slices: []
   stackName: droso

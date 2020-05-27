@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GoToGround : MonoBehaviour
 {
-    public Vector3 stackDirection = new Vector3(1, 0, 0);
     public float SCREEN_HEIGHT = 5;
     public float SPEED_MULTIPLIER = 1;
     public float HEIGHT_STACK_APPEAR = 0.5f;
@@ -44,6 +43,10 @@ public class GoToGround : MonoBehaviour
             {
                 SpawnStack();
                 _spawned = true;
+            } else
+            {
+              //Destroy Stack
+              //_spawned = false;
             }
         }
     }
@@ -54,6 +57,6 @@ public class GoToGround : MonoBehaviour
     }
 
     public void SetReady(bool setter) {
-        _ready = true;
+        _ready = setter;
     }
 }

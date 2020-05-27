@@ -14,13 +14,15 @@
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            
+
             #include "UnityCG.cginc"
 			#define MAX_STEPS 100
-			#define MAX_DIST 100
+			#define MAX_DIST 50
 			#define BORD_DIST 1
 			#define SURF_DIST 1e-2
 			#define THICKNESS 1e-1
+      #define FAR_SLICE 6
+      #define CLOSE_SLICE 3
 
 
 
@@ -32,7 +34,7 @@
 
             struct v2f
             {
-				
+
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
 				float3 ro : TEXCOORD1;
@@ -64,7 +66,7 @@
 			{
 				 return abs(sdf)-thickness;
 			}
-			
+
 			float sdCappedCylinder(float3 p, float h, float r)
 			{
 				float2 d = abs(float2(length(p.xz), p.y)) - float2(h, r);
@@ -78,12 +80,12 @@
 				return length(p-float3(ro)) - s;
 
 			}
-			
+
 			//shape to build
 			float GetDist(float3 p,float3 ro, bool cam) {
-				
+
 				//float d = length(p)-0.5;
-				//float 
+				//float
 				//float d = max(opOnion(sdCappedCylinder(p, 0.1, 0.1),THICKNESS), -sdSphere(p,2,ro));
 				float d=0;
 				if (0)
@@ -98,8 +100,8 @@
 				return d;
 			}
 
-			
-			
+
+
 
 			float Raymarch(float3 ro, float3 rd) {
 				float dO = 0;//distance origin
@@ -109,9 +111,9 @@
 					float3 p = ro + dO*rd;
 					dS = GetDist(p,ro,1);//distance to scene
 					dO += dS;
-					if (dS<SURF_DIST || dO>MAX_DIST) 
+					if (dS<SURF_DIST || dO>MAX_DIST)
 						break;
-					
+
 				}
 				return dO;
 			}
@@ -151,13 +153,13 @@
 					col.r=d/200;
 					//col.r+=d*_SinTime[2];
 					}
-				if (d<= 20 && d>5) {
+				if (d<= FAR_SLICE && d> CLOSE_SLICE) {
 					col.b =1-d/20;
 				}
-				
-				
-                
-				
+
+
+
+
                 return col;
             }
             ENDCG
