@@ -4,8 +4,20 @@ using UnityEngine;
 
 public class ParticleController : MonoBehaviour
 {
+
+
+    /*
+
+      Manages the ring of particules on the microscop
+      Handles Interaction with datasets:
+        If a dataset enters the ring => Starts animation and Call IsTrigger of the CubeController
+        If leaves => Stop animation 
+
+    */
+
+
     // Public variable instances
-    public float speed;
+    public float speed;   //Rotation speed
     public AnimationPlayer _animationPlayer;
 
     // Private variable instances
@@ -13,15 +25,13 @@ public class ParticleController : MonoBehaviour
     private ParticleSystem.MainModule settings;
     private ParticleSystemRenderer psr;
 
-    private GameObject _dataset;
-    private Vector3 scaler;
-    private bool inside_radius;
+    private GameObject _dataset = null;  //Interacting dataset
+    private Vector3 scaler; //Changes the scale of the ring
+    private bool inside_radius = false; //If a dataset is in the ring collider
 
-    // Start is called before the first frame update
     void Start()
     {
-      inside_radius = false;
-      _dataset = null;
+
       particleSystem = GetComponent<ParticleSystem>();
       settings = particleSystem.main;
       psr = GetComponent<ParticleSystemRenderer>();
@@ -30,7 +40,6 @@ public class ParticleController : MonoBehaviour
       scaler = new Vector3(particleSystem.transform.localScale.x, particleSystem.transform.localScale.y, 0.0f);
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Animate ring
@@ -51,18 +60,23 @@ public class ParticleController : MonoBehaviour
             settings.startColor = new Color(1.0f, 0.8f, 0.8f);
             inside_radius = true;
             _dataset = other.gameObject;
+
+            //Starts animation for the given dataset
             _animationPlayer.OnEnter(_dataset);
-            _dataset.GetComponent<CubeController>().isTriggered(true);
+
+            // Warns dataset it has been interacting with the microscpe
+            if(_dataset.GetComponent<CubeController>() != null)  _dataset.GetComponent<CubeController>().isTriggered(true);
         }
     }
 
     public void OnTriggerExit(Collider other) {
         if(other.gameObject.tag == "Dataset") {
-            print("Here" + Time.frameCount);
             settings.startColor = new Color(1,1,1,1);
             inside_radius = false;
-            _dataset.GetComponent<CubeController>().isTriggered(false);
+            if(_dataset.GetComponent<CubeController>() != null) _dataset.GetComponent<CubeController>().isTriggered(false);
             _dataset = null;
+
+            //Stop/Revers animation
             _animationPlayer.OnExit();
         }
     }

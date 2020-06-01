@@ -5,6 +5,14 @@ using System.IO;
 
 public class Stack2DVisualizer : MonoBehaviour
 {
+
+    /*
+
+      Visualize the chosen dataset on the screens
+      Default: Loop the data
+      Controller input: Must start by pause, can then change time/space, hit play again to loop.
+
+    */
     //Public instances
     public float delay;
     public GameObject curved_plane_prefab;
@@ -64,10 +72,10 @@ public class Stack2DVisualizer : MonoBehaviour
     void Update() {
 
       if(_ready) {
+          int screen = GetClosestScreen();
           if(_controllerGetterRightHand.GetPause()) {
 
               //Pause Closest Screen
-              int screen = GetClosestScreen();
               _paused[screen] = !_paused[screen];
 
               if(_paused[screen]){
@@ -87,12 +95,14 @@ public class Stack2DVisualizer : MonoBehaviour
             }
             else {
               Vector2 currentInput = _controllerGetterRightHand.getJoystickInput();
-              if(currentInput.magnitude>0.1f) {
+              if(currentInput.magnitude>0.1f && i==screen) {
                   _selectedTimeFloat[i] = (_selectedTimeFloat[i] + currentInput.y/10.0f);
                   _selectedDepthFloat[i] = (_selectedDepthFloat[i] + currentInput.x/10.0f);
-                  _selectedTime[i] = (int)_selectedTimeFloat[i]%DataLoader.DROSO_COLORED.GetLength(0);
-                  _selectedDepth[i] = (int)_selectedDepthFloat[i]%DataLoader.DROSO_COLORED.GetLength(1);
-                  screensAppliers[i].applyTexture(DataLoader.DROSO_COLORED[_selectedTime[i],_selectedDepth[i]]);
+                  _selectedTime[i] = (int)_selectedTimeFloat[i]%DataLoader.DATASET_COLORED.GetLength(0);
+                  _selectedDepth[i] = (int)_selectedDepthFloat[i]%DataLoader.DATASET_COLORED.GetLength(1);
+                  _selectedTime[i] = Mathf.Clamp(_selectedTime[i], 0, DataLoader.DATASET_COLORED.GetLength(0));
+                  _selectedDepth[i] = Mathf.Clamp(_selectedDepth[i], 0, DataLoader.DATASET_COLORED.GetLength(1));
+                  screensAppliers[i].applyTexture(DataLoader.DATASET_COLORED[_selectedTime[i],_selectedDepth[i]]);
               }
           }
         }
@@ -111,6 +121,12 @@ public class Stack2DVisualizer : MonoBehaviour
             _selectedDepth[i] = 0;
           }
         }
+
+        GoToGround[] screenControllers = (GoToGround[]) FindObjectsOfType<GoToGround>();
+        foreach (GoToGround screen in screenControllers)
+         {
+             screen.SetReady(boolean);
+         }
     }
 
     private int GetClosestScreen() {
@@ -125,36 +141,18 @@ public class Stack2DVisualizer : MonoBehaviour
         return bestScreen;
     }
 
-    /*
-    IEnumerator LoadImages() {
-        if(AnimationPlayer.DATASET_NAME != "Unknown") {
-            this.objects = Resources.LoadAll(AnimationPlayer.DATASET_NAME + "_processed/t001/", typeof(Texture2D));
-            this.textures = new Texture[this.objects.Length];
-            for (int i = 0; i<this.objects.Length; i++) {
-                this.textures[i] = (Texture)this.objects[i];
-            }
 
-          } else {
-            // For now we play droso by default
-            this.objects = Resources.LoadAll("droso", typeof(Texture2D));
-            this.textures = new Texture[this.objects.Length];
-            for (int i = 0; i<this.objects.Length; i++) {
-                this.textures[i] = (Texture)this.objects[i];
-            }
-          }
-          yield return null;
-    }
-    */
     IEnumerator playLoop(int screen) {
         yield return new WaitForSeconds(0.05f);
 
         //Main Loop
         while(true) {
-            for(int frame_counter = _selectedDepth[screen]; frame_counter<DataLoader.DROSO_COLORED.GetLength(1); frame_counter++) {
+            for(int frame_counter = _selectedDepth[screen]; frame_counter<DataLoader.DATASET_COLORED.GetLength(1); frame_counter++) {
                 yield return new WaitForSeconds(delay);
                 _selectedDepthFloat[screen] = frame_counter;
                 _selectedDepth[screen] = frame_counter;
-                screensAppliers[screen].applyTexture(DataLoader.DROSO_COLORED[_selectedTime[screen],_selectedDepth[screen]]);
+                _selectedDepth[screen] = Mathf.Clamp(_selectedDepth[screen], 0, DataLoader.DATASET_COLORED.GetLength(1));
+                screensAppliers[screen].applyTexture(DataLoader.DATASET_COLORED[_selectedTime[screen],_selectedDepth[screen]]);
             }
             _selectedDepth[screen] = 0;
         }

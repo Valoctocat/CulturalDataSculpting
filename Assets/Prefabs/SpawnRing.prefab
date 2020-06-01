@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 7116905431738636454}
   - component: {fileID: 7116905431738636455}
   - component: {fileID: 7116905431738636451}
-  - component: {fileID: 7116905431738636450}
   - component: {fileID: 7116905431738636461}
+  - component: {fileID: 2553503861308639380}
   m_Layer: 0
   m_Name: SpawnRing
   m_TagString: Untagged
@@ -4767,7 +4767,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d60e6247a190d6340965cfb11a6af955, type: 3}
+  m_audioClip: {fileID: 8300000, guid: df6f3c728f836ff40a65c2ed3abfb668, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -4778,9 +4778,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 0.1
-  MaxDistance: 3
+  MaxDistance: 10
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -4853,21 +4853,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7116905431738636450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7116905431738636452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9b22fa1a3f786b4c980e82e6219dea9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  durationFade: 0
-  volume: 1
-  startTimeSec: 0
 --- !u!114 &7116905431738636461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4881,3 +4866,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
+  _animationPlayer: {fileID: 0}
+--- !u!136 &2553503861308639380
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7116905431738636452}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.15
+  m_Height: 20
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -0.8}

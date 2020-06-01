@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 6913569023257756513}
   - component: {fileID: 6913569023257756512}
   - component: {fileID: 6913569023257756515}
-  - component: {fileID: 6913569023257756514}
   - component: {fileID: -2272542433312396554}
   m_Layer: 8
   m_Name: Dataset1
@@ -210,7 +209,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95dc987b93aecb446b7e7a5fff10e5b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _probability: 0.001
+  _probabilityShine: 0.001
+  _UI: {fileID: 0}
 --- !u!114 &6913569023257756512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,20 +243,6 @@ MonoBehaviour:
   durationFade: 1
   volume: 1
   startTimeSec: 0
---- !u!114 &6913569023257756514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6913569023257756540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a7aaeaede395354ba825d7c5ef9a0b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _curvedUIPrefab: {fileID: 5912274755361416750, guid: d4c8c530b07d185449a649f74a3e31f8,
-    type: 3}
 --- !u!65 &-2272542433312396554
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -92,14 +92,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7442933174497732275}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6818d3e8e5bb72f44807b35be14162f4, type: 3}
+  m_Script: {fileID: 11500000, guid: 03bc39c56e214834a864731d766cec94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stackDirection: {x: 1, y: 0, z: 0}
   SCREEN_HEIGHT: 1.5
   SPEED_MULTIPLIER: 1
   HEIGHT_STACK_APPEAR: 0.5
-  STACK_SCREEN_DISTANCE: 0.1
+  STACK_SCREEN_DISTANCE: 0.01
+  DISTANCE_START: 2
+  WORLD_SIZE: 5
+  _spawned: 0
 --- !u!114 &5270200043054156919
 MonoBehaviour:
   m_ObjectHideFlags: 0

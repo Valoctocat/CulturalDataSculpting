@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Slice
-  m_Shader: {fileID: 4800000, guid: 8b68c39637a107a42b4a9dc48f4cc64f, type: 3}
+  m_Shader: {fileID: 4800000, guid: 295578d33d315f94eba6fbf9270888fe, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0

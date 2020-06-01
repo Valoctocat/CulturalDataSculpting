@@ -150,11 +150,11 @@
 				if(length(col)<1.04 || d<3)
 					discard;
 				else{
-					col.r=d/200;
+					col.r=d/25;
 					//col.r+=d*_SinTime[2];
 					}
 				if (d<= FAR_SLICE && d> CLOSE_SLICE) {
-					col.b =1-d/20;
+					col.b =1-d/6;
 				}
 
 

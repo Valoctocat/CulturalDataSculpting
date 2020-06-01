@@ -4,18 +4,27 @@ using UnityEngine;
 
 public class CubeController : MonoBehaviour
 {
+
+    /*
+    Controls the interactions with the physical cube of a dataset
+    Update colors of the cube depending on grabbing or shimmering
+    Calls UI display on grab
+    */
+
+    // Public instances
+    public float _probabilityShine;
+    public GameObject _UI;
+
+    //Private instances
     private Material _material;
     private Color _initColor;
     private Color _initEmissionColor;
     private bool _wasGrabbed = false;
+    private bool _interacted = false;
 
-    public float _probability;
-    public GameObject UI;
-
+    //Other scripts
     private OVRGrabbable _grabbable;
     private AudioController _audioController;
-    private DatasetInterfaceController _interfaceController;
-    private bool _interacted = false;
     private UIManager _UIManager;
 
     // Start is called before the first frame update
@@ -27,16 +36,14 @@ public class CubeController : MonoBehaviour
 
         _grabbable = this.GetComponent<OVRGrabbable>();
         _audioController = this.GetComponent<AudioController>();
-        _interfaceController = this.GetComponent<DatasetInterfaceController>();
-        _UIManager = UI.GetComponent<UIManager>();
+        _UIManager = _UI.GetComponent<UIManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // If it is grabbed for the first time: Set to bright Color, Display UI
         if(_grabbable.isGrabbed) {
             if(!_wasGrabbed) {
-                _audioController.OnGrab();
                 _wasGrabbed = true;
                 _material.color = _initColor +  new Color(0,0,0, 0.5f);
                 _material.SetColor("_EmissionColor", _initEmissionColor);
@@ -44,42 +51,36 @@ public class CubeController : MonoBehaviour
             }
         }
         else {
+            //If it is released for the first time: stop UI, Reset colors
             if(_wasGrabbed){
-                _audioController.OnRelease();
                 _UIManager.OnRelease(this);
                 _wasGrabbed = false;
                 _material.color = _initColor;
                 _material.SetColor("_EmissionColor", _initEmissionColor);
             }
 
-            if(_interacted) {
-                _material.color = _initColor +  new Color(0,0,0, 0.5f);
-            }
-            else {
-                if((!_audioController.isPlaying()) & (Random.Range(0.0f, 1.0f)<_probability)) {
-                    _audioController.PlayCharacteristic(5.0f);
-                    StartCoroutine(ChangeColor(5.0f));
-                }
+            // If it has been put in the microscope: stay still
+            // Else: Probabilistic shimerring
+            if((!_audioController.isPlaying()) & (Random.Range(0.0f, 1.0f)<_probabilityShine) & (!_interacted)) {
+                _audioController.PlayCharacteristic(5.0f);
+                StartCoroutine(ChangeColor(5.0f));
             }
         }
     }
 
-    void OnCollisionEnter(Collision other) {
-        if(other.gameObject.tag == "Hand") {
-            _interfaceController.OnStart();
-        }
-    }
-
-    void OnCollisionExit(Collision other) {
-        if(other.gameObject.tag == "Hand") {
-            _interfaceController.OnStop();
-        }
-    }
-
+    // Called when the dataset hits the microscope
     public void isTriggered(bool isTriggered) {
         _interacted = isTriggered;
+        if(isTriggered) {
+            _material.color = _initColor +  new Color(0,0,0, 0.5f);
+        }
+        else {
+            _material.color = _initColor;
+            _material.SetColor("_EmissionColor", _initEmissionColor);
+        }
     }
 
+    // Coroutine to do shimmering of colors
     public IEnumerator ChangeColor(float duration) {
         float currentTime = 0;
         float i=0;

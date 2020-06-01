@@ -7,9 +7,19 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
 
+    /*
+
+      Manages the display on the UI
+      Displays on Grab of CubeController
+      Read Data from CSV file
+
+    */
+
+    //CSV Reader
     public GameObject _datasetReaderObject;
     private CSVReader _datasetReader;
 
+    //Private instances
     private TextMeshPro _textMeshOnGrabDataset;
     private string _title = null;
     private string _author = null;
@@ -32,11 +42,13 @@ public class UIManager : MonoBehaviour
 
     void Update() {
 
-        if(Input.GetKeyDown("a")) {
+    // Only for keyboard debugging
+    // Otherwise, called from CubeController on Grab
+        if(Input.GetKeyDown("u")) {
           OnGrab(FindObjectOfType<CubeController>());
         }
 
-        if(Input.GetKeyUp("a")) {
+        if(Input.GetKeyUp("u")) {
           OnRelease(FindObjectOfType<CubeController>());
         }
 

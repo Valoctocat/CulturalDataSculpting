@@ -5,6 +5,11 @@ using UnityEngine;
 public class ControllerGetter : MonoBehaviour
 {
 
+    /*
+
+    Handles the input from the User
+
+    */
 
     //Defines types for this class
     public enum AnchorSideType : int {
@@ -17,16 +22,14 @@ public class ControllerGetter : MonoBehaviour
     public AnchorSideType _anchorSide;
 
 
-
-
     void Start() {
-        QualitySettings.vSyncCount = 0;
+        QualitySettings.vSyncCount = 0; //May be removed
     }
 
     void Update()
     {
         // Update Inputs
-        OVRInput.Update();
+        OVRInput.Update(); //May be removed
     }
 
 
@@ -41,6 +44,8 @@ public class ControllerGetter : MonoBehaviour
       if(controllers) {
           if(_anchorSide == AnchorSideType.RightHand) {
               factor = OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick);
+          } else {
+              factor = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
           }
       } else {
           if(_anchorSide == AnchorSideType.RightHand) {
@@ -48,9 +53,10 @@ public class ControllerGetter : MonoBehaviour
             if(Input.GetKey("z")) factor.x = -1.0f;
             if(Input.GetKey("e")) factor.y = 1.0f;
             if(Input.GetKey("r")) factor.y = -1.0f;
+          } else {
+            //TODO defines some keyboard inputs for left hand
           }
       }
-
 
       return factor;
     }
@@ -59,28 +65,12 @@ public class ControllerGetter : MonoBehaviour
       bool cancel_input = false;
       if(controllers) {
           if(_anchorSide == AnchorSideType.RightHand) cancel_input = OVRInput.GetDown(OVRInput.Button.SecondaryThumbstick);
+          else cancel_input = OVRInput.GetDown(OVRInput.Button.PrimaryThumbstick);
       } else {
           if(_anchorSide == AnchorSideType.RightHand) cancel_input = Input.GetKeyDown("p");
+          else{} //TODO define keyboard input for left hand
       }
 
       return cancel_input;
-    }
-
-    ///////////////////////
-    //
-    //    Vibration
-    //
-    //////////////////////
-    public void SetControllerVibrationOn(float duration) {
-        if(controllers) StartCoroutine("Vibrate", duration);
-    }
-
-    IEnumerator Vibrate(float duration) {
-      if(_anchorSide == AnchorSideType.LeftHand)   OVRInput.SetControllerVibration(1.0f, 1.0f, OVRInput.Controller.LTouch);
-      else                                        OVRInput.SetControllerVibration(1.0f, 1.0f, OVRInput.Controller.RTouch);
-
-      yield return new WaitForSeconds(duration);
-      if(_anchorSide == AnchorSideType.LeftHand)   OVRInput.SetControllerVibration(0,0, OVRInput.Controller.LTouch);
-      else                                        OVRInput.SetControllerVibration(0,0, OVRInput.Controller.RTouch);
     }
 }

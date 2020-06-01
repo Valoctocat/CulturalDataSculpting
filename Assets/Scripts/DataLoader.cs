@@ -5,16 +5,17 @@ using UnityEngine;
 public class DataLoader : MonoBehaviour
 {
 
-    public static Texture[,] DROSO_COLORED;
+    // Textures in time, space
+    public static Texture[,] DATASET_COLORED;
+
+    //Public instances
     public Stack2DVisualizer _st2dVisualizer;
-
-
     public int _timesteps;
     public int _depthsteps;
 
+    //Dataset to load
     private string _dataset = null;
 
-    // TODO : Should be in a function
     public void LoadImages(string dataset)
     {
         if(dataset != null)  {
@@ -22,7 +23,7 @@ public class DataLoader : MonoBehaviour
             _dataset = dataset;
 
             //Initialization of array
-            DROSO_COLORED = new Texture[_timesteps, _depthsteps];
+            DATASET_COLORED = new Texture[_timesteps, _depthsteps];
 
             //Filling array with 2D textures
             StartCoroutine("Load");
@@ -31,32 +32,38 @@ public class DataLoader : MonoBehaviour
 
     IEnumerator Load() {
       for (int i=0; i<_timesteps; i++) {
-          //Object[] objects = new Object[_depthsteps];
-          /*
-          if(i<10) objects = Resources.LoadAll(_dataset+"_colored/t00"+i+"/", typeof(Texture2D));
-          else     objects = Resources.LoadAll(_dataset+"_colored/t0"+i+"/", typeof(Texture2D));
-          */
+
+          //Image path
           string path;
           if(i<10) path = "/t00"+i;
           else     path = "/t0"+i;
+
           // Store texture in array
           for (int j = 0; j<_depthsteps; j++) {
               Object[] objects = Resources.LoadAll(_dataset+"_colored"+path+path+"_"+j, typeof(Texture2D));
-              DROSO_COLORED[i, j] = (Texture)objects[0];
+              DATASET_COLORED[i, j] = (Texture)objects[0];
               yield return null;
           }
           print("Loaded Time: " + i);
           yield return null;
       }
+
+      //Initialize screens
       _st2dVisualizer.SetReady(true);
       print("Finished Loading !");
       yield return null;
     }
 
 
-    // Update is called once per frame
-    void Update()
+    // Called when the dataset is removed from the Pedestal
+    public void StopLoading(string dset)
     {
-
+        _dataset = null;
+        StopCoroutine("Load");
+        for(int time = 0; time < _timesteps; time++) {
+            for (int depth = 0; depth<_depthsteps; depth++) {
+                DATASET_COLORED[time, depth] = null;
+            }
+        }
     }
 }
