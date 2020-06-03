@@ -17,7 +17,8 @@ In
 
 add droso_colored.zip and unzip the files in  _droso_colored_.  
 _droso_ should already be present in the folder, otherwise proceed similarly with droso.zip
-_datasets.csv_ should already be present in > Assets/   
+_datasets.csv_ should already be present in   
+> Assets/   
   
 ## Data Loading Parameters  
 In the scene, the DataLoader object is responsible for loading the data of a selected dataset. You can set the number of time steps and depth you want to load. I recommend trying with ~7 time steps and ~20 depths steps to begin with. In total you can load to 50 time steps and 125 depth steps (6250 images).  
