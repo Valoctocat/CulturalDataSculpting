@@ -38,6 +38,12 @@ Move player with the they arrow keys
 Move droso object to the pedestal by changing its transform to 0, 1.05, 0  
 Display UI by pressing "u"  
 To play/pause a screen (second room), press "p", then you can move in time by pressing "e"/"r", or in space with "a"/"z".
+
+## Oculus build
+* Check the _droso_ rigidbody _Use Gravity_ option 
+* In the right _OVR Controller Prefab_, check controllers  
+* In _User_ disable the _Camera Control_ script
+* Make sure you build scene _First Room_ only.
   
 ## Oculus Quest Controls
 * Grab/Release a dataset: Hand trigger  
