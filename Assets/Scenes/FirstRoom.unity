@@ -705,7 +705,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80a82f968e32fac48bcdb336d5b47d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllers: 1
+  controllers: 0
   _anchorSide: 1
 --- !u!1 &282663308
 GameObject:
@@ -2229,7 +2229,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2102395008}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dffc0ef74c92b9740a537bbf5a51b590, type: 3}
   m_Name: 
@@ -2265,6 +2265,11 @@ PrefabInstance:
       propertyPath: _UI
       value: 
       objectReference: {fileID: 912811355}
+    - target: {fileID: 6913569023257756513, guid: 75e7d8c0fe68cc04380a968f6781092d,
+        type: 3}
+      propertyPath: _probabilityShine
+      value: 0.0005
+      objectReference: {fileID: 0}
     - target: {fileID: 6913569023257756517, guid: 75e7d8c0fe68cc04380a968f6781092d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2313,7 +2318,7 @@ PrefabInstance:
     - target: {fileID: 6913569023257756519, guid: 75e7d8c0fe68cc04380a968f6781092d,
         type: 3}
       propertyPath: m_UseGravity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6913569023257756522, guid: 75e7d8c0fe68cc04380a968f6781092d,
         type: 3}
