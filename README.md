@@ -21,7 +21,25 @@ _datasets.csv_ should already be present in
 > Assets/   
   
 ## Data Loading Parameters  
-In the scene, the DataLoader object is responsible for loading the data of a selected dataset. You can set the number of time steps and depth you want to load. I recommend trying with ~7 time steps and ~20 depths steps to begin with. In total you can load to 50 time steps and 125 depth steps (6250 images).  
+* In the scene, the DataLoader object is responsible for loading the data of a selected dataset. You can set the number of time steps and depth you want to load. I recommend trying with ~7 time steps and ~20 depths steps to begin with. In total you can load to 50 time steps and 125 depth steps (6250 images).  
+* CSVReader reads the data from _datasets.csv_, make sure the path is set to _Assets/datasets.csv_
+  
+## Computer Debugging
+There is an FPS mode in this project.
+To enable it make the following changes:  
+* Uncheck the _droso_ rigidbody _Use Gravity_ option  
+* In the right _OVR Controller Prefab_ uncheck controllers  
+* In _User_ enable the _Camera Control_ script
+  
+Revert those changes before building the application to Android    
+  
+Move camera with the mouse
+Move player with the they arrow keys  
+Move droso object to the pedestal by changing its transform to 0, 1.05, 0  
+Display UI by pressing "u"  
+To play/pause a screen (second room), press "p", then you can move in time by pressing "e"/"r", or in space with "a"/"z".
+
+
 
 
   
