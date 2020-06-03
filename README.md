@@ -23,7 +23,7 @@ In
 add datasets.csv if not already there.
   
 ## Data Loading Parameters  
-In the scene, the DataLoader object is responsible for loading the data of a respective dataset. You can select the number of time steps and depth you want to load. I recommend trying with ~7 time steps and ~20 depths steps to begin with. In total you can add up to 50 time steps and 125 depth steps.  
+In the scene, the DataLoader object is responsible for loading the data of a selected dataset. You can set the number of time steps and depth you want to load. I recommend trying with ~7 time steps and ~20 depths steps to begin with. In total you can load to 50 time steps and 125 depth steps (6250 images).  
 
 
   
