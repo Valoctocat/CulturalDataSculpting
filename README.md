@@ -15,12 +15,9 @@ Switch plateform to Android before adding the data to the project
 In  
 > Assets/Resources/  
 
-add droso.zip, droso_colored.zip and unzip the files in _droso_ and _droso_colored_ respectively.  
-  
-In  
-> Assets/  
-
-add datasets.csv if not already there.
+add droso_colored.zip and unzip the files in  _droso_colored_.  
+_droso_ should already be present in the folder, otherwise proceed similarly with droso.zip
+_datasets.csv_ should already be present in > Assets/   
   
 ## Data Loading Parameters  
 In the scene, the DataLoader object is responsible for loading the data of a selected dataset. You can set the number of time steps and depth you want to load. I recommend trying with ~7 time steps and ~20 depths steps to begin with. In total you can load to 50 time steps and 125 depth steps (6250 images).  
