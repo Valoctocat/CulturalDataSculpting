@@ -16,7 +16,7 @@ In
 > Assets/Resources/  
 
 add droso_colored.zip and unzip the files in  _droso_colored_.  
-_droso_ should already be present in the folder, otherwise proceed similarly with droso.zip
+_droso_ should already be present in the folder, otherwise proceed similarly with droso.zip  
 _datasets.csv_ should already be present in   
 > Assets/   
   
