@@ -73,6 +73,7 @@ public class CubeController : MonoBehaviour
         _interacted = isTriggered;
         if(isTriggered) {
             _material.color = _initColor +  new Color(0,0,0, 0.5f);
+            StopCoroutine("ChangeColor");
         }
         else {
             _material.color = _initColor;

@@ -16,6 +16,11 @@ public class DataLoader : MonoBehaviour
     //Dataset to load
     private string _dataset = null;
 
+    void Start() {
+        _timesteps = Mathf.Clamp(_timesteps, 5, 50);
+        _depthsteps = Mathf.Clamp(_depthsteps, 5,125);
+    }
+
     public void LoadImages(string dataset)
     {
         if(dataset != null)  {
