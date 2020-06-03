@@ -38,8 +38,11 @@ Move player with the they arrow keys
 Move droso object to the pedestal by changing its transform to 0, 1.05, 0  
 Display UI by pressing "u"  
 To play/pause a screen (second room), press "p", then you can move in time by pressing "e"/"r", or in space with "a"/"z".
-
-
+  
+## Oculus Quest Controls
+* Grab/Release a dataset: Hand trigger  
+* Pause/Play the closest screen: joystick button down   
+* Move in time/space: joystick input  
 
 
   
